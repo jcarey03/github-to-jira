@@ -172,6 +172,31 @@ def pad_list(l, size, obj):
 
 
 def convert_markdown(gh_markdown):
+    """
+        GitHub uses different markdown than JIRA. The following Python3 translator can be used to translate
+        between markdown:
+
+            https://github.com/miyuchina/mistletoe
+
+        Since this script is Python2, subprocessing is used to shell out to the markdown translator.
+
+        The contents of main_converter.py is given below:
+
+            import sys
+
+            import mistletoe
+            from contrib.jira_renderer import JIRARenderer
+
+
+            def main(github_markdown):
+                rendered = mistletoe.markdown(github_markdown, JIRARenderer)
+                print(rendered)
+
+
+            if __name__ == '__main__':
+                main(sys.stdin.readlines())
+    """
+
     if gh_markdown:
         p = subprocess.Popen(
             [
@@ -231,5 +256,6 @@ def write_jira_csv(fd):
 
 
 if __name__ == '__main__':
+    # provide target file to write csv as a command line argument
     with open(sys.argv[1], 'w') as fd:
         write_jira_csv(fd)
