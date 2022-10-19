@@ -24,7 +24,8 @@ GITHUB_ISSUES_COMMENTS = GITHUB_ISSUES_LIST + "/%s/comments"
 
 # e.g., '[bot]'
 # issues referencing these user prefixes will be filtered out
-ignore_user_prefixes = {}
+ignore_user_prefixes = {
+}
 
 # e.g., 'jcarey03'
 # issues referencing these users will be filtered out
@@ -180,7 +181,8 @@ def convert_markdown(gh_markdown):
 
         Since this script is Python2, subprocessing is used to shell out to the markdown translator.
 
-        The contents of main_converter.py is given below:
+        The contents of github_to_jira_markdown_translator.py is given below. Clone the mistletoe repo and add a
+        new file with the below contents.
 
             import sys
 
@@ -201,7 +203,7 @@ def convert_markdown(gh_markdown):
         p = subprocess.Popen(
             [
                 '/Users/jcarey/.pyenv/shims/python',
-                '/Users/jcarey/src/mistletoe/mistletoe/main_converter.py'
+                '/Users/jcarey/src/mistletoe/mistletoe/github_to_jira_markdown_translator.py'
             ],
             stdin=subprocess.PIPE,
             stdout=subprocess.PIPE,
